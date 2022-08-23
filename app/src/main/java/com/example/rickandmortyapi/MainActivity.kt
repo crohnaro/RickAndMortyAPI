@@ -5,6 +5,8 @@ import android.util.Log
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import com.squareup.moshi.KotlinJsonAdapterFactory
 import com.squareup.moshi.Moshi
 import org.w3c.dom.Text
@@ -20,7 +22,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val textView = findViewById<TextView>(R.id.textView)
+        val nametextView = findViewById<TextView>(R.id.characterName)
+        val headerImageView = findViewById<AppCompatImageView>(R.id.characterImage)
+        val aliveTextView = findViewById<AppCompatTextView>(R.id.aliveStatus)
+        val originTextView = findViewById<TextView>(R.id.characterOriginResult)
+        val speciesTextView = findViewById<TextView>(R.id.characterSpeciesResult)
+
+
 
         val moshi = Moshi.Builder().addLast(KotlinJsonAdapterFactory()).build()
         val retrofit = Retrofit.Builder()
@@ -41,9 +49,12 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 val body = response.body()!!
-                val name = body.name
+                nametextView.text = body.name
+                aliveTextView.text = body.status
+                originTextView.text = body.origin.name
+                speciesTextView.text = body.species
 
-                textView.text = name
+
             }
 
 
