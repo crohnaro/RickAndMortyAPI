@@ -1,10 +1,11 @@
 package com.example.rickandmortyapi
 
-import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.rickandmortyapi.GenerateCharacterByIdResponse
+import com.example.rickandmortyapi.SharedRepository
 import kotlinx.coroutines.launch
 
 class SharedViewModel: ViewModel() {

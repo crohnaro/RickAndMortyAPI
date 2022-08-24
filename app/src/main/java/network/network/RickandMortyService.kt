@@ -1,6 +1,6 @@
-package com.example.rickandmortyapi
+package network.network
 
-import retrofit2.Call
+import com.example.rickandmortyapi.GenerateCharacterByIdResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
