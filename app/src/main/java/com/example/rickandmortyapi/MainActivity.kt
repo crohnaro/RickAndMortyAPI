@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.lifecycle.ViewModelProvider
+import com.airbnb.epoxy.EpoxyRecyclerView
 import com.squareup.picasso.Picasso
 
 
@@ -16,19 +17,15 @@ class MainActivity : AppCompatActivity() {
         ViewModelProvider(this).get(SharedViewModel::class.java)
     }
 
+    private val epoxyController = CharacterDetailsEpoxyController()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val nametextView = findViewById<TextView>(R.id.characterName)
-        val headerImageView = findViewById<AppCompatImageView>(R.id.characterImage)
-        val aliveTextView = findViewById<AppCompatTextView>(R.id.aliveStatus)
-        val originTextView = findViewById<TextView>(R.id.characterOriginResult)
-        val speciesTextView = findViewById<TextView>(R.id.characterSpeciesResult)
-        val genderImage = findViewById<AppCompatImageView>(R.id.characterGenderImage)
 
-        viewModel.refreshCharacter(54)
         viewModel.characterByIdLiveData.observe(this){ response ->
+            epoxyController.characterResponse = response
             if (response == null){
                 Toast.makeText(
                     this@MainActivity,
@@ -37,19 +34,10 @@ class MainActivity : AppCompatActivity() {
                 ).show()
                 return@observe
             }
-            nametextView.text = response.name
-            aliveTextView.text = response.status
-            originTextView.text = response.origin.name
-            speciesTextView.text = response.species
-
-            if (response.gender.equals("male", true)){
-                genderImage.setImageResource(R.drawable.ic_male_24)
-            } else {
-                genderImage.setImageResource(R.drawable.ic_female_24)
-            }
-
-            Picasso.get().load(response.image).into(headerImageView);
         }
+        viewModel.refreshCharacter(54)
+        val epoxyRecyclerView = findViewById<EpoxyRecyclerView>(R.id.epoxyRecycerView)
+        epoxyRecyclerView.setControllerAndBuildModels(epoxyController)
     }
 
 
