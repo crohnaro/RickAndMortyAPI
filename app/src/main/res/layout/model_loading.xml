@@ -12,10 +12,11 @@
         android:indeterminateOnly="true"
         android:indeterminateTint="?attr/colorSecondary"
         app:layout_constraintBaseline_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-        
+
     </androidx.core.widget.ContentLoadingProgressBar>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

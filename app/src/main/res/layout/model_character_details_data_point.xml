@@ -6,10 +6,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <TextView
-        android:id="@+id/characterOrigin"
+        android:id="@+id/labelTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
+        android:layout_marginStart="16dp"
         android:textSize="26sp"
         android:text="Origin"
         android:textStyle="italic"
@@ -17,34 +18,15 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
-        android:id="@+id/characterOriginResult"
+        android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Earth"
         android:textSize="18sp"
         android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="@id/characterOrigin"
-        app:layout_constraintTop_toBottomOf="@+id/characterOrigin" />
+        app:layout_constraintStart_toStartOf="@id/labelTextView"
+        app:layout_constraintTop_toBottomOf="@+id/labelTextView" />
 
-    <TextView
-        android:id="@+id/characterSpecies"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Species"
-        android:textSize="26sp"
-        android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="@+id/characterOrigin"
-        app:layout_constraintTop_toBottomOf="@id/characterOriginResult" />
 
-    <TextView
-        android:id="@+id/characterSpeciesResult"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="human"
-        android:textSize="18sp"
-        android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="@id/characterSpecies"
-        app:layout_constraintTop_toBottomOf="@+id/characterSpecies" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
