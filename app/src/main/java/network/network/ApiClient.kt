@@ -10,6 +10,10 @@ class ApiClient(
         return safeApiCall { rickandMortyService.getCharacaterById(characterId) }
     }
 
+    suspend fun getCharactersPage(pageIndex: Int): SimpleResponse<GetCharacterPageResponse>{
+        return safeApiCall { rickandMortyService.getCharacterPage(pageIndex) }
+    }
+
     private inline  fun <T> safeApiCall(apiCall: () -> Response<T>): SimpleResponse<T> {
         return try {
             SimpleResponse.success(apiCall.invoke())
