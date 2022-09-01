@@ -8,8 +8,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 class CharactersDataSource(
-    private val viewModel: SharedViewModel,
-
     private val coroutineScope: CoroutineScope,
     private val repository: CharactersRepository
     ): PageKeyedDataSource<Int, GenerateCharacterByIdResponse>() {
@@ -18,8 +16,13 @@ class CharactersDataSource(
         callback: LoadInitialCallback<Int, GenerateCharacterByIdResponse>
     ) {
         coroutineScope.launch {
-            val characterList = repository.getCharacterList(1)
-            callback.onResult(characterList, null, 2)
+            val page = repository.getCharacterPage(1)
+            if (page == null){
+                callback.onResult(emptyList(), null, null)
+                return@launch
+            }
+
+            callback.onResult(page.results, null, getPageIndexFromNext(page.info.next))
         }
     }
 
@@ -28,8 +31,13 @@ class CharactersDataSource(
         callback: LoadCallback<Int, GenerateCharacterByIdResponse>
     ) {
         coroutineScope.launch {
-            val characterList = repository.getCharacterList(params.key)
-            callback.onResult(characterList,params.key + 1)
+            val page = repository.getCharacterPage(params.key)
+            if (page == null){
+                callback.onResult(emptyList(), null)
+                return@launch
+            }
+
+            callback.onResult(page.results, getPageIndexFromNext(page.info.next) )
         }
 
     }
@@ -39,6 +47,10 @@ class CharactersDataSource(
         callback: LoadCallback<Int, GenerateCharacterByIdResponse>
     ) {
         TODO("Not yet implemented")
+    }
+
+    private fun getPageIndexFromNext(next: String?): Int?{
+        return next?.split("?page=")?.get(1)?.toInt()
     }
 
 
