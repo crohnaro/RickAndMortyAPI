@@ -10,7 +10,9 @@
         android:layout_height="match_parent"
         android:id="@+id/epoxyRecycerView"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        android:padding="8dp"
         app:spanCount="2"
+        app:itemSpacing="8dp"
         tools:itemCount="12"
 
         />
