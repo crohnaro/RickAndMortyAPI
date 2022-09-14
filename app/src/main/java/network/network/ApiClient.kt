@@ -1,6 +1,7 @@
 package network.network
 
 import com.example.rickandmortyapi.GenerateCharacterByIdResponse
+import network.network.response.GetEpisodeByIdResponse
 import retrofit2.Response
 
 class ApiClient(
@@ -12,6 +13,14 @@ class ApiClient(
 
     suspend fun getCharactersPage(pageIndex: Int): SimpleResponse<GetCharacterPageResponse>{
         return safeApiCall { rickandMortyService.getCharacterPage(pageIndex) }
+    }
+
+    suspend fun getEpisodeById(episodeId: Int): SimpleResponse<GetEpisodeByIdResponse>{
+        return safeApiCall { rickandMortyService.getEpisodeById(episodeId) }
+    }
+
+    suspend fun getEpisodeRange(episodeRange: String): SimpleResponse<List<GetEpisodeByIdResponse>>{
+        return safeApiCall { rickandMortyService.getEpisodeRange(episodeRange) }
     }
 
     private inline  fun <T> safeApiCall(apiCall: () -> Response<T>): SimpleResponse<T> {
