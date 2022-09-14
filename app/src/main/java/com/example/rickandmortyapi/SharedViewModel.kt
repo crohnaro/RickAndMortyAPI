@@ -6,13 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.rickandmortyapi.GenerateCharacterByIdResponse
 import com.example.rickandmortyapi.SharedRepository
+import domain.models.Character
 import kotlinx.coroutines.launch
 
 class SharedViewModel: ViewModel() {
     private val repository = SharedRepository()
 
-    private val _characterByIdLiveData = MutableLiveData<GenerateCharacterByIdResponse>()
-    val characterByIdLiveData : LiveData<GenerateCharacterByIdResponse?> = _characterByIdLiveData
+    private val _characterByIdLiveData = MutableLiveData<Character>()
+    val characterByIdLiveData : LiveData<Character?> = _characterByIdLiveData
 
     fun refreshCharacter(characterId: Int){
         viewModelScope.launch {

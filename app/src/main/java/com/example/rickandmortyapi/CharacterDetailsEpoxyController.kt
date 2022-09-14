@@ -5,6 +5,7 @@ import com.example.rickandmortyapi.databinding.ModelCharacterDetailsDataPointBin
 import com.example.rickandmortyapi.databinding.ModelCharacterDetailsHeaderBinding
 import com.example.rickandmortyapi.databinding.ModelCharacterDetailsImageBinding
 import com.squareup.picasso.Picasso
+import domain.models.Character
 import epoxy.LoadingEpoxyModel
 import epoxy.ViewBindingKotlinModel
 
@@ -18,7 +19,7 @@ class CharacterDetailsEpoxyController: EpoxyController() {
             }
         }
 
-    var characterResponse: GenerateCharacterByIdResponse? = null
+    var character: Character? = null
         set(value) {
             field = value
             if (field != null){
@@ -32,32 +33,32 @@ class CharacterDetailsEpoxyController: EpoxyController() {
             return
         }
 
-        if (characterResponse == null){
+        if (character == null){
             return
         }
 
         //Header Model
         HeaderEpoxyModel(
-            name = characterResponse!!.name,
-            gender = characterResponse!!.gender,
-            status = characterResponse!!.status
+            name = character!!.name,
+            gender = character!!.gender,
+            status = character!!.status
         ).id("header").addTo(this)
 
         //Image Model
         ImageEpoxyModel(
-            imageUrl = characterResponse!!.image
+            imageUrl = character!!.image
         ).id("image").addTo(this)
 
 
         //Data Point Models
         DataPointEpoxyModel(
             tittle = "Origin",
-            description = characterResponse!!.origin.name
+            description = character!!.origin.name
         ).id("data_point_1").addTo(this)
 
         DataPointEpoxyModel(
             tittle = "Species",
-            description = characterResponse!!.species
+            description = character!!.species
         ).id("data_point_2").addTo(this)
     }
 
