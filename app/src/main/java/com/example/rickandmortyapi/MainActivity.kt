@@ -27,9 +27,9 @@ class MainActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
 
-        viewModel.characterByIdLiveData.observe(this){ response ->
-            epoxyController.characterResponse = response
-            if (response == null){
+        viewModel.characterByIdLiveData.observe(this){ character ->
+            epoxyController.character = character
+            if (character == null){
                 Toast.makeText(
                     this@MainActivity,
                     "Unucessfull network call",

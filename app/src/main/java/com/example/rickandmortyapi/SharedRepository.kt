@@ -1,9 +1,11 @@
 package com.example.rickandmortyapi
 
+import domain.mappers.CharacterMapper
+import domain.models.Character
 import network.network.NetworkLayer
 
 class SharedRepository {
-    suspend fun getCharacterById(characterId: Int): GenerateCharacterByIdResponse? {
+    suspend fun getCharacterById(characterId: Int): Character? {
         val request = NetworkLayer.apiClient.getCharacterById(characterId)
 
         if(request.failed){
@@ -13,6 +15,6 @@ class SharedRepository {
         if (!request.isSuccessful){
             return null
         }
-        return request.body
+        return CharacterMapper.buildFrom(response = request.body)
     }
 }
