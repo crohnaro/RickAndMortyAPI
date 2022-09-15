@@ -1,10 +1,10 @@
 package com.example.rickandmortyapi
 
+import com.airbnb.epoxy.CarouselModel_
 import com.airbnb.epoxy.EpoxyController
-import com.example.rickandmortyapi.databinding.ModelCharacterDetailsDataPointBinding
-import com.example.rickandmortyapi.databinding.ModelCharacterDetailsHeaderBinding
-import com.example.rickandmortyapi.databinding.ModelCharacterDetailsImageBinding
+import com.example.rickandmortyapi.databinding.*
 import com.squareup.picasso.Picasso
+import domain.mappers.Episode
 import domain.models.Character
 import epoxy.LoadingEpoxyModel
 import epoxy.ViewBindingKotlinModel
@@ -48,6 +48,18 @@ class CharacterDetailsEpoxyController: EpoxyController() {
         ImageEpoxyModel(
             imageUrl = character!!.image
         ).id("image").addTo(this)
+
+        if (character!!.episodeList.isNotEmpty()){
+            val items = character!!.episodeList.map {
+                EpisodeCarouselItemEpoxyModel(it).id(it.id)
+            }
+            TitleEpoxyModel(title = "Episodes").id("title_episodes").addTo(this)
+            CarouselModel_()
+                .id("episode_carousel")
+                .models(items)
+                .numViewsToShowOnScreen(1.15f)
+                .addTo(this)
+        }
 
 
         //Data Point Models
@@ -94,6 +106,24 @@ class CharacterDetailsEpoxyController: EpoxyController() {
         override fun ModelCharacterDetailsDataPointBinding.bind() {
             labelTextView.text = tittle
             textView.text = description
+        }
+    }
+    data class EpisodeCarouselItemEpoxyModel(
+        val episode: Episode
+    ): ViewBindingKotlinModel<ModelEpisodeCarouselItemBinding>(R.layout.model_episode_carousel_item){
+
+        override fun ModelEpisodeCarouselItemBinding.bind() {
+            episodeTextView.text = episode.episode
+            episodeDetailsTextView.text = "${episode.name}\n${episode.airDate}"
+        }
+    }
+
+    data class TitleEpoxyModel(
+        val title: String
+    ): ViewBindingKotlinModel<ModelTitleBinding>(R.layout.model_title) {
+
+        override fun ModelTitleBinding.bind() {
+            titleTextView.text = title
         }
     }
 
