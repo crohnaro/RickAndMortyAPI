@@ -6,7 +6,9 @@ import com.example.rickandmortyapi.GenerateCharacterByIdResponse
 import com.example.rickandmortyapi.R
 import com.example.rickandmortyapi.databinding.ModelCharacterListItemBinding
 import com.example.rickandmortyapi.databinding.ModelCharacterListTitleBinding
+import com.example.rickandmortyapi.databinding.ModelEpisodeCarouselItemBinding
 import com.squareup.picasso.Picasso
+import domain.mappers.Episode
 import epoxy.LoadingEpoxyModel
 import epoxy.ViewBindingKotlinModel
 import java.util.*
@@ -79,4 +81,6 @@ class CharacterListPagingEpoxyController(
             return totalSpanCount
         }
     }
+
+
 }
