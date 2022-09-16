@@ -42,6 +42,10 @@ android {
 
 dependencies {
 
+    //Jetpack Navigation
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.5.2'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.5.2'
+
     //Networking
     implementation("com.squareup.okhttp3:logging-interceptor:4.10.0")
     debugImplementation "com.github.chuckerteam.chucker:library:3.5.2"
