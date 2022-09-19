@@ -37,6 +37,15 @@ class CharacterListFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_character_list, container, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        view?.postDelayed({
+            val navGraphActivity = activity as NavGraphActivity
+            navGraphActivity.navController.navigate(R.id.action_characterListFragment_to_characterDetailFragment)
+        }, 1_500)
+    }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
