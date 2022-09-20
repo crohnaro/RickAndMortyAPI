@@ -14,7 +14,7 @@ class CharacterListActivity: AppCompatActivity() {
     private val epoxyController = CharacterListPagingEpoxyController (::onCharacterSelected)
 
     private val viewModel: CharactersViewModel by lazy {
-        ViewModelProvider(this).get(CharactersViewModel::class.java)
+        ViewModelProvider(this)[CharactersViewModel::class.java]
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
