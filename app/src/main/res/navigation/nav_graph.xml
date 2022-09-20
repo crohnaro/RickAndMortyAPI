@@ -16,7 +16,16 @@
     </fragment>
     <fragment
         android:id="@+id/characterDetailFragment"
-        android:name="com.example.rickandmortyapi.characterDetailFragment"
+        android:name="com.example.rickandmortyapi.CharacterDetailFragment"
         android:label="fragment_character_detail"
-        tools:layout="@layout/activity_main" />
+        tools:layout="@layout/activity_main">
+
+        <argument
+            android:name="characterId"
+            app:argType="integer"
+            android:defaultValue="-1">
+
+        </argument>
+
+    </fragment>
 </navigation>
