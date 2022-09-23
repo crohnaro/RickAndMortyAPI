@@ -26,6 +26,10 @@
         android:label="Character Detail"
         tools:layout="@layout/fragment_character_detail">
 
+        <deepLink app:uri="https://simplemorty.com/character/{characterId}">
+
+        </deepLink>
+
         <argument
             android:name="characterId"
             app:argType="integer"
