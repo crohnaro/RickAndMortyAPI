@@ -27,7 +27,7 @@ class CharacterDetailFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+        // Usando Inflate para jogar as informações nesse fragment
         return inflater.inflate(R.layout.fragment_character_detail, container, false)
     }
 
@@ -42,6 +42,7 @@ class CharacterDetailFragment : Fragment() {
                     "Unucessfull network call",
                     Toast.LENGTH_SHORT
                 ).show()
+                findNavController().navigateUp()
                 return@observe
             }
         }
