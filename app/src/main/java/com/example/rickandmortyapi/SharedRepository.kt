@@ -3,20 +3,29 @@ package com.example.rickandmortyapi
 import domain.mappers.CharacterMapper
 import domain.models.Character
 import network.network.NetworkLayer
+import network.network.SimpleMortyCache
 import network.network.response.GetEpisodeByIdResponse
 
 class SharedRepository {
     suspend fun getCharacterById(characterId: Int): Character? {
+
+        val cachedCharacter = SimpleMortyCache.characterMap[characterId]
+        if (cachedCharacter != null){
+            return cachedCharacter
+        }
         val request = NetworkLayer.apiClient.getCharacterById(characterId)
 
         if(request.failed || !request.isSuccessful){
             return null
         }
         val networkEpisodes = getEpisodesFromCharacterResponse(request.body)
-        return CharacterMapper.buildFrom(
+        val character =  CharacterMapper.buildFrom(
             response = request.body,
             episodes = networkEpisodes
         )
+
+        SimpleMortyCache.characterMap[characterId] = character
+        return character
     }
 
     private suspend fun getEpisodesFromCharacterResponse(

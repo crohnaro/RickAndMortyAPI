@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/episodeListFragment"
-        android:name="com.example.rickandmortyapi.EpisodeListFragment"
+        android:name="episodes.EpisodeListFragment"
         android:label="Rick and Morty Episodes"
         tools:layout="@layout/fragment_character_list" >
 <!--        <action-->

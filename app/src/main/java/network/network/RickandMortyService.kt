@@ -2,6 +2,7 @@ package network.network
 
 import com.example.rickandmortyapi.GenerateCharacterByIdResponse
 import network.network.response.GetEpisodeByIdResponse
+import network.network.response.GetEpisodePageResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -28,4 +29,9 @@ interface RickandMortyService {
     suspend fun getEpisodeRange(
         @Path("episode-range") episodeRange: String
     ): Response<List<GetEpisodeByIdResponse>>
+
+    @GET("episode/")
+    suspend fun getEpisodePage(
+        @Query("page")pageIndex: Int
+    ): Response<GetEpisodePageResponse>
 }

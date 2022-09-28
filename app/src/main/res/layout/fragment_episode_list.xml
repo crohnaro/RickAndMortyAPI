@@ -13,7 +13,10 @@
         android:paddingBottom="24dp"
         app:itemSpacing="8dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:itemCount="12"></com.airbnb.epoxy.EpoxyRecyclerView>
-<!--        tools:listitem="@layout/model_episode_list_item" />-->
+        tools:itemCount="12"
+        tools:listitem="@layout/model_character_list_item"
+        >
+    </com.airbnb.epoxy.EpoxyRecyclerView>
+<!--         />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
