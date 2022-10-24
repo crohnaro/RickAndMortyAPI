@@ -28,6 +28,10 @@ class EpisodeListEpoxyController: PagingDataEpoxyController<Episode>() {
             episodeNameTextView.text = episode.name
             episodeAirDateTextView.text = episode.airDate
             episodeNumberTextView.text = episode.episode
+
+            root.setOnClickListener { onClick(episode.id)}
+
+
         }
 
     }
