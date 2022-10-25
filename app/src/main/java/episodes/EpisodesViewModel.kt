@@ -5,7 +5,10 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.cachedIn
+import androidx.paging.insertSeparators
 import com.example.rickandmortyapi.Constants
+import domain.mappers.Episode
+import kotlinx.coroutines.flow.map
 
 class EpisodesViewModel: ViewModel() {
 
@@ -18,6 +21,10 @@ class EpisodesViewModel: ViewModel() {
         )
     ) {
         EpisodePagingSource(repository)
-    }.flow.cachedIn(viewModelScope)
+    }.flow.cachedIn(viewModelScope).map {
+        it.insertSeparators { model: EpisodesUiModel?, model2: EpisodesUiModel? ->
+            return@insertSeparators null
+        }
+    }
 
 }
