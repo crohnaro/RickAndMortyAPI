@@ -4,20 +4,31 @@ import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.paging3.PagingDataEpoxyController
 import com.example.rickandmortyapi.R
 import com.example.rickandmortyapi.databinding.ModelEpisodeListItemBinding
+import com.example.rickandmortyapi.databinding.ModelEpisodeListTittleBinding
 import domain.mappers.Episode
 import epoxy.ViewBindingKotlinModel
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 
 @OptIn(ObsoleteCoroutinesApi::class)
-class EpisodeListEpoxyController: PagingDataEpoxyController<Episode>() {
+class EpisodeListEpoxyController: PagingDataEpoxyController<EpisodesUiModel>() {
 
-    override fun buildItemModel(currentPosition: Int, item: Episode?): EpoxyModel<*> {
-        return EpisodeListItemEpisodeEpoxyModel(
-            episode = item!!,
-            onClick = { episodeId ->
+    override fun buildItemModel(currentPosition: Int, item: EpisodesUiModel?): EpoxyModel<*> {
+        return when (item!!) {
+            is EpisodesUiModel.Item -> {
+                val episode = ( item as EpisodesUiModel.Item ).episode
+                EpisodeListItemEpisodeEpoxyModel(
+                    episode = episode,
+                    onClick = { episodeId ->
 
+                    }
+                ).id("episode_${episode.id}")
             }
-        ).id("episode_${item.id}")
+
+            is EpisodesUiModel.Header -> {
+                val headerText = ( item as EpisodesUiModel.Header ).text
+                EpisodeListTittleEpoxyModel(headerText).id("header_$headerText")
+            }
+        }
     }
 
     data class EpisodeListItemEpisodeEpoxyModel(
@@ -30,9 +41,17 @@ class EpisodeListEpoxyController: PagingDataEpoxyController<Episode>() {
             episodeNumberTextView.text = episode.episode
 
             root.setOnClickListener { onClick(episode.id)}
-
-
         }
 
     }
+
+    data class EpisodeListTittleEpoxyModel(
+        val tittle: String
+    ) : ViewBindingKotlinModel<ModelEpisodeListTittleBinding>(R.layout.model_episode_list_tittle){
+        override fun ModelEpisodeListTittleBinding.bind(){
+            textView.text = tittle
+        }
+    }
+
+
 }
