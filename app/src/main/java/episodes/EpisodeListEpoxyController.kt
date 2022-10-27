@@ -38,7 +38,7 @@ class EpisodeListEpoxyController: PagingDataEpoxyController<EpisodesUiModel>() {
         override fun ModelEpisodeListItemBinding.bind() {
             episodeNameTextView.text = episode.name
             episodeAirDateTextView.text = episode.airDate
-            episodeNumberTextView.text = episode.episode
+            episodeNumberTextView.text = episode.getFormattedSeasonTruncated()
 
             root.setOnClickListener { onClick(episode.id)}
         }
