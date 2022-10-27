@@ -23,7 +23,26 @@ class EpisodesViewModel: ViewModel() {
         EpisodePagingSource(repository)
     }.flow.cachedIn(viewModelScope).map {
         it.insertSeparators { model: EpisodesUiModel?, model2: EpisodesUiModel? ->
-            return@insertSeparators null
+            if (model == null ) {
+                return@insertSeparators EpisodesUiModel.Header("Season 1")
+            }
+
+            if (model2 == null ){
+                return@insertSeparators null
+            }
+
+            if (model is EpisodesUiModel.Header || model2 is EpisodesUiModel.Header){
+                return@insertSeparators null
+            }
+
+            val episode1 = (model as EpisodesUiModel.Item).episode
+            val episode2 = (model2 as EpisodesUiModel.Item).episode
+
+            return@insertSeparators if (episode2.seasonNumber != episode1.seasonNumber){
+                EpisodesUiModel.Header("Season ${episode2.seasonNumber}")
+            } else {
+                null
+            }
         }
     }
 
