@@ -5,6 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.PagingData
 import com.example.rickandmortyapi.R
 import com.example.rickandmortyapi.databinding.FragmentEpisodeListBinding
@@ -26,7 +27,13 @@ class EpisodeListFragment: Fragment(R.layout.fragment_episode_list) {
         super.onViewCreated(view, savedInstanceState)
         _binding = FragmentEpisodeListBinding.bind(view)
 
-        val epoxyController = EpisodeListEpoxyController()
+        val epoxyController = EpisodeListEpoxyController { episodeClickedId ->
+            val navDirections =
+                EpisodeListFragmentDirections.actionEpisodeListFragmentToEpisodeDetailBottomSheetFragment(
+                    episodeClickedId
+                )
+            findNavController().navigate(navDirections)
+        }
 
         lifecycleScope.launch{
             viewModel.flow.collectLatest { pagingData: PagingData<EpisodesUiModel> ->

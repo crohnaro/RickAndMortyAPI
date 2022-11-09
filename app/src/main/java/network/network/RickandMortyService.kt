@@ -15,6 +15,11 @@ interface RickandMortyService {
         @Path("character-id") characterId: Int
     ): Response<GenerateCharacterByIdResponse>
 
+    @GET("character/{list}")
+    suspend fun getMultipleCharacters(
+        @Path("list") characterList: List<String>
+    ): Response<List<GenerateCharacterByIdResponse>>
+
     @GET("character")
     suspend fun getCharacterPage(
         @Query("page")pageIndex:Int

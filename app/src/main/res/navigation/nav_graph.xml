@@ -52,5 +52,29 @@
 <!--            app:popEnterAnim="@anim/slide_in_from_left"-->
 
 <!--            />-->
+
+
+        <action
+            android:id="@+id/action_episodeListFragment_to_episodeDetailBottomSheetFragment"
+            app:destination="@id/episodeDetailBottomSheetFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/episodeDetailBottomSheetFragment"
+        android:name="episodes.EpisodeDetailBottomSheetFragment"
+        android:label=""
+        tools:layout="@layout/fragment_episode_detail">
+
+        <argument
+            android:name="episodeId"
+            app:argType="integer"
+            android:defaultValue="-1">
+        </argument>
+
+
+
+
+
+    </dialog>
+
+
 </navigation>
