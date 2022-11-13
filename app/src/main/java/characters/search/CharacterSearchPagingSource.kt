@@ -12,9 +12,17 @@ class CharacterSearchPagingSource(
     private val localExceptionCallback: (LocalException) ->Unit
 ) : PagingSource<Int, domain.models.Character>() {
 
-    sealed class LocalException: Exception(){
-        object EmptySearch : LocalException()
-        object NoResults : LocalException()
+    sealed class LocalException(
+        val tittle: String,
+        val description: String = ""
+    ): Exception(){
+        object EmptySearch : LocalException(
+            tittle = "Comece a digitar para procurar!   "
+        )
+        object NoResults : LocalException(
+            tittle = "Opa",
+            description = "Parece que não encontramos nada :("
+        )
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, domain.models.Character>{
@@ -32,6 +40,12 @@ class CharacterSearchPagingSource(
             characterName = userSearch,
             pageIndex = pageNumber
         )
+
+        if (request.data?.code() == 404){
+            val exception = LocalException.NoResults
+            localExceptionCallback(exception)
+            return LoadResult.Error(exception)
+        }
 
         request.exception?.let{
             return LoadResult.Error(it)

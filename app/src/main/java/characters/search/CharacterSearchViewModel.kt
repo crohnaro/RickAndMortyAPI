@@ -1,6 +1,10 @@
 package characters.search
 
+import android.media.metrics.Event
 import android.util.Log
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -17,7 +21,8 @@ class CharacterSearchViewModel: ViewModel() {
         get() {
             if (field == null || field?.invalid == true) {
                 field = CharacterSearchPagingSource(currentUserSearch){ localException ->
-                    Log.e("LOCAL", localException.toString())
+
+                    _localExceptionEventLiveData.postValue(com.example.rickandmortyapi.Event(localException))
                 }
             }
 
@@ -34,6 +39,9 @@ class CharacterSearchViewModel: ViewModel() {
     ) {
         pagingSource!!
     }.flow.cachedIn(viewModelScope)
+
+    private val _localExceptionEventLiveData = MutableLiveData<com.example.rickandmortyapi.Event<CharacterSearchPagingSource.LocalException>>()
+    val localExceptionEventLiveData: LiveData<com.example.rickandmortyapi.Event<CharacterSearchPagingSource.LocalException>> = _localExceptionEventLiveData
 
 
     fun submitQuery(userSearch: String){
