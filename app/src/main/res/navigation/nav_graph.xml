@@ -20,6 +20,12 @@
 
             />
     </fragment>
+
+    <fragment
+        android:id="@+id/characterSearchFragment"
+        android:name="characters.search.CharacterSearchFragment"
+        android:label="Character Search"
+        tools:layout="@layout/fragment_character_search" />
     <fragment
         android:id="@+id/characterDetailFragment"
         android:name="com.example.rickandmortyapi.CharacterDetailFragment"

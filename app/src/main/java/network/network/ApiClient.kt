@@ -20,6 +20,13 @@ class ApiClient(
         return safeApiCall { rickandMortyService.getCharacterPage(pageIndex) }
     }
 
+    suspend fun getCharactersPage(
+        characterName: String,
+        pageIndex: Int
+    ): SimpleResponse<GetCharacterPageResponse>{
+        return safeApiCall { rickandMortyService.getCharacterPage(characterName, pageIndex) }
+    }
+
     suspend fun getEpisodeById(episodeId: Int): SimpleResponse<GetEpisodeByIdResponse>{
         return safeApiCall { rickandMortyService.getEpisodeById(episodeId) }
     }
