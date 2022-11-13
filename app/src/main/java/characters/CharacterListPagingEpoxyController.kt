@@ -35,7 +35,7 @@ class CharacterListPagingEpoxyController(
             return
         }
 
-        CharacterGridTittleEpoxyModel("Main Family")
+        CharacterGridTittleEpoxyModel("Família Principal")
             .id("main_family_header")
             .addTo(this)
 

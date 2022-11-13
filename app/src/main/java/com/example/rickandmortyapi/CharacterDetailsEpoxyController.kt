@@ -53,7 +53,7 @@ class CharacterDetailsEpoxyController: EpoxyController() {
             val items = character!!.episodeList.map {
                 EpisodeCarouselItemEpoxyModel(it).id(it.id)
             }
-            TitleEpoxyModel(title = "Episodes").id("title_episodes").addTo(this)
+            TitleEpoxyModel(title = "Episódios").id("title_episodes").addTo(this)
             CarouselModel_()
                 .id("episode_carousel")
                 .models(items)

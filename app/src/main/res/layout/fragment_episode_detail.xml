@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="48dp"
-    android:background="?colorSurface">
+    android:background="@color/purple_200">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/episodeNumberTextView"
@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
-        android:textColor="?colorOnSurface"
+        android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="normal"
         app:layout_constraintStart_toStartOf="parent"
@@ -25,7 +25,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:textColor="?colorOnSurface"
+        android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:textColor="?colorOnSurface"
+        android:textColor="@color/white"
         android:textSize="14sp"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="@id/episodeNameTextView"
@@ -49,7 +49,7 @@
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="1px"
-        android:background="?colorOnSurface"
+        android:background="@color/white"
         app:layout_constraintBottom_toTopOf="@id/labelTextView"
         app:layout_constraintTop_toBottomOf="@id/episodeNameTextView" />
 
@@ -58,8 +58,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="Characters"
-        android:textColor="?colorOnSurface"
+        android:text="Personagens"
+        android:textColor="@color/white"
         android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@id/episodeNameTextView"
